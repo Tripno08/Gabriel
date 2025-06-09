@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Autenticação e Autorização
+
+## Implementação
+- Usar JWT para tokens de autenticação
+- Senhas devem ser hasheadas com bcrypt
+- Tokens devem expirar em 24h
+- Refresh tokens não são necessários para o MVP
+
+## Middleware de Autenticação
+- [src/middlewares/auth.ts](mdc:src/middlewares/auth.ts) contém a lógica de autenticação
+- Verificar token em todas as rotas protegidas
+- Extrair user ID e role do token
+- Adicionar user ao objeto Request
+
+## Controle de Acesso
+- CLIENTS podem:
+  - Ver serviços
+  - Criar reviews
+  - Ver próprio perfil
+  - Ver reviews de providers
+
+- PROVIDERS podem:
+  - Criar/editar/deletar próprios serviços
+  - Ver próprias reviews
+  - Ver próprio perfil
+  - Ver perfil de clients que fizeram reviews
+
+## Validação
+- Validar email único no registro
+- Senha mínima de 8 caracteres
+- Email deve ser válido
+- Role deve ser CLIENT ou PROVIDER

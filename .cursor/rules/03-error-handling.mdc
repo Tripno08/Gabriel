@@ -1,0 +1,48 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Tratamento de Erros
+
+## Princípios
+- Usar classes de erro customizadas
+- Centralizar tratamento de erros em middleware
+- Logs claros e informativos
+- Respostas de erro consistentes
+
+## Classes de Erro
+```typescript
+class AppError extends Error {
+  constructor(
+    public statusCode: number,
+    public message: string
+  ) {
+    super(message);
+  }
+}
+```
+
+## Middleware de Erro
+- [src/middlewares/error.ts](mdc:src/middlewares/error.ts) trata todos os erros
+- Converter erros do Prisma em AppError
+- Não expor detalhes internos em produção
+- Logar erros com stack trace em desenvolvimento
+
+## Formato de Resposta
+```json
+{
+  "error": {
+    "message": "string",
+    "code": "string"
+  }
+}
+```
+
+## Códigos de Erro
+- 400: Validação falhou
+- 401: Não autenticado
+- 403: Não autorizado
+- 404: Recurso não encontrado
+- 409: Conflito
+- 500: Erro interno

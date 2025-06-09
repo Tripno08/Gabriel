@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Validação de Dados
+
+## Biblioteca
+- Usar Zod para validação de schemas
+- Definir schemas em arquivos separados
+- Reutilizar schemas quando possível
+
+## Localização
+- Schemas em `src/schemas`
+- Um arquivo por recurso
+- Exportar schemas individuais
+
+## Exemplos de Schema
+
+### User
+```typescript
+const userSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(8),
+  role: z.enum(['CLIENT', 'PROVIDER'])
+});
+```
+
+### Service
+```typescript
+const serviceSchema = z.object({
+  name: z.string().min(3),
+  description: z.string().min(10),
+});
+```
+
+### Review
+```typescript
+const reviewSchema = z.object({
+  providerId: z.string().uuid(),
+  rating: z.number().min(1).max(5),
+  comment: z.string().optional()
+});
+```
+
+## Middleware
+- Validar body com schema apropriado
+- Validar query params quando necessário
+- Validar path params (UUIDs)
+- Retornar 400 para dados inválidos

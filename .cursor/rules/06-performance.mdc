@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Performance
+
+## Princípios para MVP
+- Manter simplicidade
+- Evitar otimizações prematuras
+- Focar em funcionalidade
+- Documentar pontos de melhoria futura
+
+## Consultas ao Banco
+- Usar select específico (não *)
+- Incluir apenas relações necessárias
+- Evitar N+1 queries
+- Usar transactions quando necessário
+
+## Limitações Aceitas
+- Sem paginação inicial
+- Sem cache
+- Sem índices complexos
+- Sem otimizações de query
+
+## Pontos de Atenção
+- Monitorar tempo de resposta
+- Observar uso de memória
+- Identificar gargalos
+- Documentar melhorias futuras
+
+## Melhorias Futuras
+- Implementar paginação
+- Adicionar cache
+- Otimizar queries
+- Adicionar índices
+- Implementar rate limiting

@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Estrutura do Projeto
+
+Este projeto segue uma estrutura MVC simplificada para um MVP. Os principais arquivos e diretórios são:
+
+- [src/index.ts](mdc:src/index.ts) - Ponto de entrada da aplicação
+- [prisma/schema.prisma](mdc:prisma/schema.prisma) - Schema do banco de dados
+- [src/config/prisma.ts](mdc:src/config/prisma.ts) - Configuração do Prisma
+
+## Organização de Código
+
+### Controllers
+- Devem estar em `src/controllers`
+- Um controller por recurso (users, services, reviews)
+- Métodos devem ser assíncronos
+- Usar try/catch para tratamento de erros
+
+### Routes
+- Devem estar em `src/routes`
+- Um arquivo de rotas por recurso
+- Usar middleware de autenticação quando necessário
+- Validar inputs com zod
+
+### Middlewares
+- Devem estar em `src/middlewares`
+- Funções pequenas e focadas
+- Tratar erros adequadamente
+
+### Models
+- Usar tipos do Prisma Client
+- Extensões de tipos em `src/types`
+
+## Convenções
+- Nomes de arquivos em kebab-case
+- Classes em PascalCase
+- Funções e variáveis em camelCase
+- Interfaces prefixadas com 'I'
+- Types prefixados com 'T'
+- Enums sem prefixo

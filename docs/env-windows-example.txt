@@ -1,0 +1,31 @@
+# Gabriel - Configuração Windows (.env)
+# Copie este conteúdo para um arquivo .env na raiz do projeto
+
+# Banco de dados
+DATABASE_URL="postgresql://gabriel:gabriel123@localhost:5432/gabriel"
+
+# JWT Secret - ALTERE PARA PRODUÇÃO!
+JWT_SECRET="gabriel-windows-dev-secret-key-2024-super-secret"
+
+# Servidor
+PORT=3000
+NODE_ENV=development
+
+# Logs
+LOG_LEVEL=debug
+
+# URLs
+FRONTEND_URL=http://localhost:5173
+API_URL=http://localhost:3000
+
+# Docker (se usando)
+POSTGRES_USER=gabriel
+POSTGRES_PASSWORD=gabriel123
+POSTGRES_DB=gabriel
+
+# Configurações Mobile/Android Windows
+ANDROID_HOME=C:\Users\%USERNAME%\AppData\Local\Android\Sdk
+ANDROID_SDK_ROOT=%ANDROID_HOME%
+
+# Capacitor
+CAPACITOR_ANDROID_STUDIO_PATH="C:\Program Files\Android\Android Studio\bin\studio64.exe" 

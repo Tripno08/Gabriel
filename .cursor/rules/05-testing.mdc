@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Testes
+
+## Estrutura
+- Testes em `src/__tests__`
+- Usar Jest como framework
+- Separar testes por tipo (unit, integration)
+- Manter cobertura básica para MVP
+
+## Testes Unitários
+- Testar funções de utilidade
+- Testar validações
+- Testar transformações de dados
+- Não depender de banco de dados
+
+## Testes de Integração
+- Testar fluxos completos
+- Usar banco de teste separado
+- Limpar dados entre testes
+- Testar casos de erro
+
+## Mocks
+- Usar para serviços externos
+- Simular erros de rede
+- Simular timeouts
+- Manter mocks simples
+
+## Convenções
+- Arquivos de teste com sufixo `.test.ts`
+- Descrever comportamento esperado
+- Agrupar testes relacionados
+- Manter testes legíveis

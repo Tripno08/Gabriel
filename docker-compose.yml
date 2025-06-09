@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: gabriel-db
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gabriel
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gabriel-network
+
+  api:
+    container_name: gabriel-api
+    image: gabriel-api-fixed
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/gabriel?schema=public
+      JWT_SECRET: super_secret_key_change_in_production
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - ./prisma:/app/prisma
+      - ./public:/app/public
+    networks:
+      - gabriel-network
+
+networks:
+  gabriel-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 
