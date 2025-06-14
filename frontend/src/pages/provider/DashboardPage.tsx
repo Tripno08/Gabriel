@@ -468,9 +468,9 @@ export default function ProviderDashboardPage() {
                       {service.views}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Link to={`/provider/services/edit/${service.id}`} className="text-indigo-600 hover:text-indigo-900 mr-4">
-                        Editar
-                      </Link>
+                                                <Link to={`/provider/services/edit/${service.id}`} className="text-primary-600 hover:text-primary-900 mr-4">
+                            Editar
+                          </Link>
                     </td>
                   </tr>
                 ))}

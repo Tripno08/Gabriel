@@ -1,12 +1,12 @@
 {
-  "name": "Gabriel - Marketplace de Serviços",
-  "short_name": "Gabriel",
+  "name": "Wyn - Marketplace de Serviços",
+  "short_name": "Wyn",
   "description": "Plataforma que conecta clientes e prestadores de serviços",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
-  "orientation": "portrait-primary",
+  "theme_color": "#F97316",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/icon-192.png",

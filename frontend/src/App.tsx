@@ -13,6 +13,7 @@ import NotFoundPage from './pages/common/NotFoundPage'
 import ServicesPage from './pages/common/ServicesPage'
 import ServiceDetailPage from './pages/common/ServiceDetailPage'
 import ProviderProfilePage from './pages/common/ProviderProfilePage'
+import SupportPage from './pages/common/SupportPage'
 
 // Páginas de autenticação
 import LoginPage from './pages/auth/LoginPage'
@@ -31,6 +32,7 @@ import ProviderDashboardPage from './pages/provider/DashboardPage'
 import ProviderProfileEditPage from './pages/provider/ProfileEditPage'
 import ProviderServicesPage from './pages/provider/ServicesPage'
 import ProviderServiceNewPage from './pages/provider/ServiceNewPage'
+import ProviderServiceEditPage from './pages/provider/ServiceEditPage'
 import ProviderRequestsPage from './pages/provider/RequestsPage'
 import ProviderRequestDetailPage from './pages/provider/RequestDetailPage'
 
@@ -69,6 +71,7 @@ function AppRoutes() {
           <Route path="services" element={<ServicesPage />} />
           <Route path="services/:id" element={<ServiceDetailPage />} />
           <Route path="providers/:id" element={<ProviderProfilePage />} />
+          <Route path="support" element={<SupportPage />} />
           
           {/* Rotas do cliente */}
           <Route path="client/dashboard" element={isClient ? <ClientDashboardPage /> : <Navigate to="/login" />} />
@@ -83,6 +86,7 @@ function AppRoutes() {
           <Route path="provider/profile/edit" element={isProvider ? <ProviderProfileEditPage /> : <Navigate to="/login" />} />
           <Route path="provider/services" element={isProvider ? <ProviderServicesPage /> : <Navigate to="/login" />} />
           <Route path="provider/services/new" element={isProvider ? <ProviderServiceNewPage /> : <Navigate to="/login" />} />
+          <Route path="provider/services/edit/:id" element={isProvider ? <ProviderServiceEditPage /> : <Navigate to="/login" />} />
           <Route path="provider/requests" element={isProvider ? <ProviderRequestsPage /> : <Navigate to="/login" />} />
           <Route path="provider/requests/:id" element={isProvider ? <ProviderRequestDetailPage /> : <Navigate to="/login" />} />
           

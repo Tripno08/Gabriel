@@ -5,7 +5,7 @@ export default function AuthLayout() {
     <div className="min-h-screen flex flex-col justify-center bg-gray-50 py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link to="/" className="flex justify-center">
-          <h1 className="text-3xl font-bold text-primary-600">Gabriel</h1>
+          <h1 className="text-3xl font-bold text-primary-600">Wyn</h1>
         </Link>
         <h2 className="mt-4 text-center text-2xl font-bold text-gray-900">
           Bem-vindo(a) de volta

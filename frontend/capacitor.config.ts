@@ -1,13 +1,11 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.github.gabriel',
-  appName: 'Gabriel',
+  appId: 'com.wyn.app',
+  appName: 'Wyn',
   webDir: 'dist',
   server: {
-    androidScheme: 'https',
-    url: 'http://192.168.15.173:4173',
-    cleartext: true
+    androidScheme: 'https'
   },
   android: {
     buildOptions: {

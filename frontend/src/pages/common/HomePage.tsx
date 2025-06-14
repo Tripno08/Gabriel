@@ -35,7 +35,7 @@ export default function HomePage() {
               ) : (
                 <>
                   <Link
-                    to="/auth/register"
+                    to="/register"
                     className="btn btn-primary px-6 py-3 text-base"
                   >
                     Começar agora

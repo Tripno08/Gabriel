@@ -347,12 +347,12 @@ export default function ProviderServicesPage() {
                             </button>
                           )}
                           
-                          <Link 
-                            to={`/provider/services/edit/${service.id}`}
-                            className="text-indigo-600 hover:text-indigo-900"
-                          >
-                            Editar
-                          </Link>
+                                                  <Link
+                          to={`/provider/services/edit/${service.id}`}
+                          className="text-primary-600 hover:text-primary-900"
+                        >
+                          Editar
+                        </Link>
                         </div>
                       </td>
                     </tr>

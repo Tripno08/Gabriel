@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { QRCodeSVG } from 'qrcode.react'
 
 interface Request {
   id: string
@@ -309,6 +310,67 @@ export default function ProviderRequestDetailPage() {
             </div>
           </div>
         </div>
+        
+        {/* Seção de Pagamento com QR Code */}
+        {request.status === 'CONFIRMED' && request.paymentStatus === 'PENDING' && (
+          <div className="p-6 border-b border-gray-200 bg-gray-50">
+            <h3 className="text-lg font-semibold mb-4">Aguardando Pagamento via PIX</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col items-center">
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <QRCodeSVG 
+                    value={`00020126330014BR.GOV.BCB.PIX0111${id}5204000053039865802BR5913WYN_SERVICES6009SAO_PAULO62070503***6304${request.id}`}
+                    size={200}
+                    level="M"
+                    includeMargin={true}
+                  />
+                </div>
+                <p className="text-sm text-gray-600 mt-2 text-center">
+                  QR Code para pagamento do cliente
+                </p>
+              </div>
+              
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-gray-600">Valor a receber:</p>
+                  <p className="text-2xl font-bold text-primary-600">{formatCurrency(request.price)}</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-gray-600">Status do pagamento:</p>
+                  <span className={`inline-block mt-1 px-3 py-1 rounded-full text-sm font-medium ${getPaymentStatusLabel(request.paymentStatus).color}`}>
+                    {getPaymentStatusLabel(request.paymentStatus).label}
+                  </span>
+                </div>
+                
+                <div className="pt-2">
+                  <p className="text-xs text-gray-500">
+                    * O cliente pode escanear este QR Code para realizar o pagamento
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    * Você será notificado quando o pagamento for confirmado
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* Pagamento Confirmado */}
+        {request.paymentStatus === 'PAID' && (
+          <div className="p-6 border-b border-gray-200 bg-green-50">
+            <div className="flex items-center">
+              <svg className="w-6 h-6 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <h3 className="text-lg font-semibold text-green-800">Pagamento Confirmado</h3>
+                <p className="text-sm text-green-600">O pagamento de {formatCurrency(request.price)} foi recebido com sucesso.</p>
+              </div>
+            </div>
+          </div>
+        )}
         
         {/* Ações */}
         <div className="p-6 border-b border-gray-200">

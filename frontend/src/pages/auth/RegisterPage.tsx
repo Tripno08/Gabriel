@@ -77,8 +77,8 @@ export default function RegisterPage() {
     <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-800">Criar Conta</h1>
-        <p className="mt-2 text-gray-600">
-          Junte-se à plataforma Gabriel para conectar-se a serviços de qualidade
+        <p className="mt-2 text-center text-sm text-gray-600">
+          Junte-se à plataforma Wyn para conectar-se a serviços de qualidade
         </p>
       </div>
 

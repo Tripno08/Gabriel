@@ -87,7 +87,7 @@ export default function BottomNavigation() {
   const tabs = user?.role === 'PROVIDER' ? providerTabs : clientTabs
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 safe-area-bottom z-40">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-secondary-200 safe-area-bottom z-40 shadow-soft">
       <div className="flex items-center justify-around py-2">
         {tabs.map((tab) => {
           const Icon = tab.icon
@@ -100,7 +100,7 @@ export default function BottomNavigation() {
               className={`flex flex-col items-center justify-center p-2 min-w-0 flex-1 ${
                 active 
                   ? 'text-primary-600' 
-                  : 'text-gray-400 hover:text-gray-600'
+                  : 'text-secondary-400 hover:text-secondary-600'
               } transition-colors duration-200`}
             >
               <div className={`relative ${tab.id === 'add' ? 'p-2 rounded-full' : ''} ${
@@ -116,8 +116,8 @@ export default function BottomNavigation() {
                 )}
               </div>
               <span className={`text-xs mt-1 font-medium truncate ${
-                active ? 'text-primary-600' : 'text-gray-400'
-              } ${tab.id === 'add' ? 'text-gray-600' : ''}`}>
+                active ? 'text-primary-600' : 'text-secondary-400'
+              } ${tab.id === 'add' ? 'text-secondary-600' : ''}`}>
                 {tab.label}
               </span>
             </button>

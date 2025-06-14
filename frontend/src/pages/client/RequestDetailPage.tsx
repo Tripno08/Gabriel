@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { QRCodeSVG } from 'qrcode.react'
 
 interface Request {
   id: string
@@ -304,41 +305,95 @@ export default function RequestDetailPage() {
                     {request.providerName}
                   </Link>
                 </div>
-                
-                {request.status === 'CONFIRMED' && request.paymentStatus === 'PENDING' && (
-                  <div className="mt-4">
-                    <Link
-                      to={`/client/payment/${request.id}`}
-                      className="inline-block px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
-                    >
-                      Realizar Pagamento
-                    </Link>
-                  </div>
-                )}
-                
-                {(request.status === 'PENDING' || request.status === 'CONFIRMED') && (
-                  <div className="mt-4">
-                    <button
-                      onClick={handleCancelRequest}
-                      className="inline-block px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                    >
-                      Cancelar Solicitação
-                    </button>
-                  </div>
-                )}
-                
-                {request.status === 'COMPLETED' && !request.messages.some(m => m.content.includes('Avaliação enviada')) && (
-                  <div className="mt-4">
-                    <Link
-                      to={`/client/reviews/add/${request.id}`}
-                      className="inline-block px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
-                    >
-                      Avaliar Serviço
-                    </Link>
-                  </div>
-                )}
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Seção de Pagamento com QR Code */}
+        {request.status === 'CONFIRMED' && request.paymentStatus === 'PENDING' && (
+          <div className="p-6 border-b border-gray-200 bg-gray-50">
+            <h3 className="text-lg font-semibold mb-4">Pagamento via PIX</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col items-center">
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <QRCodeSVG 
+                    value={`00020126330014BR.GOV.BCB.PIX0111${request.providerId}5204000053039865802BR5913WYN_SERVICES6009SAO_PAULO62070503***6304${request.id}`}
+                    size={200}
+                    level="M"
+                    includeMargin={true}
+                  />
+                </div>
+                <p className="text-sm text-gray-600 mt-2 text-center">
+                  Escaneie o QR Code com seu app de pagamento
+                </p>
+              </div>
+              
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-gray-600">Valor a pagar:</p>
+                  <p className="text-2xl font-bold text-primary-600">{formatCurrency(request.price)}</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-gray-600">Chave PIX (copia e cola):</p>
+                  <div className="mt-1 p-2 bg-white rounded border border-gray-300 text-xs break-all">
+                    00020126330014BR.GOV.BCB.PIX0111{request.providerId}5204000053039865802BR5913WYN_SERVICES6009SAO_PAULO62070503***6304{request.id}
+                  </div>
+                </div>
+                
+                <div className="pt-2">
+                  <p className="text-xs text-gray-500">
+                    * Este é um QR Code simulado para fins de demonstração
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    * O pagamento será confirmado automaticamente em alguns segundos
+                  </p>
+                </div>
+                
+                <button
+                  onClick={() => {
+                    // Simular confirmação de pagamento
+                    setTimeout(() => {
+                      if (request) {
+                        setRequest({
+                          ...request,
+                          paymentStatus: 'PAID'
+                        })
+                        alert('Pagamento confirmado com sucesso!')
+                      }
+                    }, 2000)
+                  }}
+                  className="w-full px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
+                >
+                  Simular Pagamento Realizado
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* Ações */}
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex flex-wrap gap-3">
+            {(request.status === 'PENDING' || request.status === 'CONFIRMED') && (
+              <button
+                onClick={handleCancelRequest}
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              >
+                Cancelar Solicitação
+              </button>
+            )}
+            
+            {request.status === 'COMPLETED' && !request.messages.some(m => m.content.includes('Avaliação enviada')) && (
+              <Link
+                to={`/client/reviews/add/${request.id}`}
+                className="inline-block px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
+              >
+                Avaliar Serviço
+              </Link>
+            )}
           </div>
         </div>
         

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import axios from 'axios'
+import { API_URL } from '../../config/api'
 
 // Tipos
 export type Role = 'CLIENT' | 'PROVIDER'
@@ -24,12 +25,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-// API base URL - usando o window.location.hostname para permitir acesso via IP da rede local
-const API_URL = `http://${window.location.hostname}:3000/api`
-
-// Para debug
-console.log('API_URL:', API_URL);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)

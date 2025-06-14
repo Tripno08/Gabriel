@@ -33,8 +33,8 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         </div>
 
         {/* Nome do app */}
-        <h1 className="text-4xl font-bold text-white mb-2 animate-fade-in">
-          Gabriel
+        <h1 className="text-4xl font-bold text-primary-600 animate-fade-in">
+          Wyn
         </h1>
         <p className="text-primary-100 text-lg mb-8 animate-fade-in-delay">
           Conectando pessoas e serviços
