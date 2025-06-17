@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import BottomNavigation from './BottomNavigation'
 import { useAuth } from '../../context/auth/AuthContext'
+import { LogOut } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 interface MobileLayoutProps {
   children: ReactNode
@@ -15,7 +17,13 @@ export default function MobileLayout({
   title,
   showHeader = true 
 }: MobileLayoutProps) {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -29,7 +37,7 @@ export default function MobileLayout({
                   <h1 className="text-xl font-bold text-gray-900">{title}</h1>
                 ) : (
                   <div>
-                    <h1 className="text-lg font-bold text-gray-900">Wyn</h1>
+                    <h1 className="text-lg font-bold text-gray-900">Gabriel</h1>
                     <p className="text-sm text-gray-500">
                       Olá, {user?.name?.split(' ')[0] || 'Usuário'}!
                     </p>
@@ -37,12 +45,14 @@ export default function MobileLayout({
                 )}
               </div>
               
-              {/* Notification indicator */}
-              <div className="relative">
-                <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                </div>
-              </div>
+              {/* Logout button */}
+              <button
+                onClick={handleLogout}
+                className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                title="Sair"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </header>
