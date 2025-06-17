@@ -2,23 +2,23 @@ version: '3.8'
 
 services:
   db:
-    container_name: gabriel-db
+    container_name: wyn-db
     image: postgres:14-alpine
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: gabriel
+      POSTGRES_DB: wyn
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - gabriel-network
+      - wyn-network
 
   api:
-    container_name: gabriel-api
-    image: gabriel-api-fixed
+    container_name: wyn-api
+    image: wyn-api-fixed
     build:
       context: .
       dockerfile: Dockerfile
@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/gabriel?schema=public
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/wyn?schema=public
       JWT_SECRET: super_secret_key_change_in_production
       PORT: 3000
     ports:
@@ -36,10 +36,10 @@ services:
       - ./prisma:/app/prisma
       - ./public:/app/public
     networks:
-      - gabriel-network
+      - wyn-network
 
 networks:
-  gabriel-network:
+  wyn-network:
     driver: bridge
 
 volumes:

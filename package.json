@@ -21,9 +21,9 @@
     "frontend:ios": "cd frontend && npx cap run ios",
     "frontend:android": "cd frontend && npx cap run android",
     "dev:all": "npm run docker:up && npm run frontend:dev",
-    "prisma:migrate": "docker exec -it gabriel-api npx prisma migrate dev",
-    "prisma:seed": "docker exec -it gabriel-api npx prisma db seed",
-    "prisma:studio": "docker exec -it gabriel-api npx prisma studio",
+    "prisma:migrate": "docker exec -it wyn-api npx prisma migrate dev",
+    "prisma:seed": "docker exec -it wyn-api npx prisma db seed",
+    "prisma:studio": "docker exec -it wyn-api npx prisma studio",
     "setup": "npm install && cd frontend && npm install && cd .. && npm run docker:up && sleep 5 && npm run prisma:migrate && npm run prisma:seed",
     "clean": "rm -rf node_modules frontend/node_modules frontend/ios frontend/android && docker-compose down -v"
   },
