@@ -20,7 +20,9 @@ export default function MobileLayout({
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
-  const handleLogout = () => {
+  const handleLogout = (e?: any) => {
+    e?.preventDefault()
+    e?.stopPropagation()
     logout()
     navigate('/login')
   }
@@ -45,13 +47,21 @@ export default function MobileLayout({
                 )}
               </div>
               
-              {/* Logout button */}
+              {/* Logout button with touch support */}
               <button
                 onClick={handleLogout}
-                className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
-                title="Sair"
+                onTouchEnd={handleLogout}
+                className="relative z-50 p-3 -m-1 text-gray-600 active:text-red-600 active:bg-red-50 rounded-lg transition-colors duration-200 touch-manipulation"
+                style={{ 
+                  minWidth: '44px', 
+                  minHeight: '44px',
+                  WebkitTapHighlightColor: 'transparent',
+                  userSelect: 'none'
+                }}
+                type="button"
+                aria-label="Sair da conta"
               >
-                <LogOut className="w-5 h-5" />
+                <LogOut className="w-5 h-5 pointer-events-none" />
               </button>
             </div>
           </div>
