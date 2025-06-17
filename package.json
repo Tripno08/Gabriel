@@ -11,7 +11,21 @@
     "db:seed": "npx prisma db seed",
     "setup:windows": "scripts\\windows-setup.bat",
     "dev:windows": "scripts\\windows-dev.bat",
-    "mobile:windows": "scripts\\windows-mobile.bat"
+    "mobile:windows": "scripts\\windows-mobile.bat",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:reset": "docker-compose down -v && docker-compose up -d",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:ios": "cd frontend && npx cap run ios",
+    "frontend:android": "cd frontend && npx cap run android",
+    "dev:all": "npm run docker:up && npm run frontend:dev",
+    "prisma:migrate": "docker exec -it gabriel-api npx prisma migrate dev",
+    "prisma:seed": "docker exec -it gabriel-api npx prisma db seed",
+    "prisma:studio": "docker exec -it gabriel-api npx prisma studio",
+    "setup": "npm install && cd frontend && npm install && cd .. && npm run docker:up && sleep 5 && npm run prisma:migrate && npm run prisma:seed",
+    "clean": "rm -rf node_modules frontend/node_modules frontend/ios frontend/android && docker-compose down -v"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",

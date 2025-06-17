@@ -3,6 +3,27 @@
 ## Visão Geral
 Gabriel é uma plataforma mobile-first que conecta clientes e prestadores de serviços. O sistema permite que prestadores ofertem seus serviços e que clientes os contratem, realizem avaliações e gerenciem seus pedidos através de uma experiência nativa otimizada para dispositivos móveis.
 
+## 🚀 Guia Rápido de Configuração Local
+
+Para configurar e executar o projeto completo em sua máquina:
+
+```bash
+# Clone o repositório
+git clone [URL_DO_REPOSITORIO]
+cd gabriel
+
+# Configure e execute tudo de uma vez
+npm run setup    # Instala dependências, configura DB e seeds
+npm run dev:all  # Inicia backend (Docker) e frontend
+
+# Acessar:
+# Frontend: http://localhost:5173
+# Backend: http://localhost:3000
+# iOS/Android: veja LOCAL_SETUP.md
+```
+
+📖 **Guia completo**: [LOCAL_SETUP.md](LOCAL_SETUP.md) - Instruções detalhadas para todos os ambientes
+
 ## 🚀 Tecnologias Utilizadas
 
 ### Backend
