@@ -32,7 +32,13 @@ app.use(cors({
     'http://192.168.0.2:4173',
     'http://192.168.15.173:5173',
     'http://192.168.15.173:5174',
-    'http://192.168.15.173:4173'
+    'http://192.168.15.173:4173',
+    'http://10.0.2.2:5173',
+    'http://10.0.2.2:5174',
+    'http://10.0.2.2:4173',
+    'capacitor://localhost',
+    'ionic://localhost',
+    'http://localhost'
   ],
   credentials: true
 }));

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
+import { useAuth } from '../../context/auth/AuthContext'
+import { LogOut } from 'lucide-react'
 
 const providerSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
@@ -53,6 +55,8 @@ const CATEGORIES = [
 ]
 
 export default function ProviderProfileEditPage() {
+  const { logout } = useAuth()
+  const navigate = useNavigate()
   const [provider, setProvider] = useState<Provider>({
     name: 'Rafael Santos',
     email: 'rafael.santos@email.com',
@@ -252,6 +256,11 @@ export default function ProviderProfileEditPage() {
     const numbers = value.replace(/\D/g, '')
     
     return numbers.replace(/(\d{5})(\d{3})/, '$1-$2')
+  }
+  
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
   }
   
   if (isLoading) {
@@ -683,6 +692,21 @@ export default function ProviderProfileEditPage() {
           </button>
         </div>
       </form>
+      
+      {/* Botão de Logout */}
+      <div className="mt-8 bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold mb-4">Sair da Conta</h2>
+        <p className="text-gray-600 mb-4">
+          Ao sair, você precisará fazer login novamente para acessar sua conta.
+        </p>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          Sair
+        </button>
+      </div>
     </div>
   )
 } 

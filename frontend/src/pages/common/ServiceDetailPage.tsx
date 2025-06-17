@@ -105,12 +105,13 @@ export default function ServiceDetailPage() {
   const handleRequestService = () => {
     if (!user) {
       // Redirecionar para login se não estiver autenticado
-      navigate('/auth/login', { state: { redirect: `/services/${id}` } })
+      navigate('/login', { state: { redirect: `/services/${id}` } })
       return
     }
     
-    // Aqui seria a lógica para solicitar o serviço
-    // Por enquanto, apenas redirecionar para a página de solicitações do cliente
+    // TODO: Implementar modal ou página de confirmação de solicitação
+    // Por enquanto, apenas mostrar um alerta e redirecionar
+    alert('Serviço solicitado com sucesso! O prestador entrará em contato em breve.')
     navigate('/client/requests')
   }
 

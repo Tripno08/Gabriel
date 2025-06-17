@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth/AuthContext'
+import { LogOut } from 'lucide-react'
 
 interface Client {
   name: string
@@ -19,7 +20,8 @@ interface Client {
 }
 
 export default function ClientProfileEditPage() {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const [client, setClient] = useState<Client>({
     name: '',
     email: '',
@@ -218,6 +220,11 @@ export default function ClientProfileEditPage() {
     const numbers = value.replace(/\D/g, '')
     
     return numbers.replace(/(\d{5})(\d{3})/, '$1-$2')
+  }
+  
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
   }
   
   if (isLoading) {
@@ -510,6 +517,21 @@ export default function ClientProfileEditPage() {
           </button>
         </div>
       </form>
+      
+      {/* Botão de Logout */}
+      <div className="mt-8 bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold mb-4">Sair da Conta</h2>
+        <p className="text-gray-600 mb-4">
+          Ao sair, você precisará fazer login novamente para acessar sua conta.
+        </p>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          Sair
+        </button>
+      </div>
     </div>
   )
 } 

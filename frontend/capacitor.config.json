@@ -1,0 +1,14 @@
+{
+  "appId": "io.github.wyn",
+  "appName": "Wyn",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true,
+    "allowNavigation": ["http://10.0.2.2:3000", "http://localhost:3000"],
+    "iosScheme": "http"
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+} 

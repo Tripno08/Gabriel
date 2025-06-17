@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import axios from 'axios'
+import axiosInstance from '../../config/axios'
 import { API_URL } from '../../config/api'
 
 // Tipos
@@ -41,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       try {
         // Configurar axios com o token
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
         
         // Aqui poderia fazer uma chamada para verificar o token
         // Como é um MVP, vamos apenas buscar os dados do usuário do localStorage
@@ -76,7 +77,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     setIsLoading(true)
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, { email, password })
+      console.log('Tentando login com:', { email, API_URL })
+      const response = await axiosInstance.post('/auth/login', { email, password })
       const { token: newToken, user: userData } = response.data
       
       // Garantir que o campo type exista (compatibilidade)
@@ -93,9 +95,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(userData)
       
       // Configurar axios para futuras requisições
-      axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
     } catch (error) {
       console.error('Erro ao fazer login:', error)
+      if (axios.isAxiosError(error)) {
+        console.error('Detalhes do erro:', {
+          message: error.message,
+          code: error.code,
+          response: error.response?.data,
+          status: error.response?.status,
+          config: {
+            url: error.config?.url,
+            method: error.config?.method,
+            baseURL: error.config?.baseURL
+          }
+        })
+      }
       throw error
     } finally {
       setIsLoading(false)
@@ -106,7 +121,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (name: string, email: string, password: string, role: Role) => {
     setIsLoading(true)
     try {
-      await axios.post(`${API_URL}/auth/register`, { name, email, password, role })
+      await axiosInstance.post('/auth/register', { name, email, password, role })
       // Após o registro, fazer login automaticamente
       await login(email, password)
     } catch (error) {
@@ -123,7 +138,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('user')
     setToken(null)
     setUser(null)
-    delete axios.defaults.headers.common['Authorization']
+    delete axiosInstance.defaults.headers.common['Authorization']
   }
   
   const value = {

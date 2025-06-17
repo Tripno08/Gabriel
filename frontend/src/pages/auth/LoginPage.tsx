@@ -37,8 +37,13 @@ export default function LoginPage() {
       await login(data.email, data.password)
       navigate('/')
     } catch (err) {
+      console.error('Login error:', err);
       if (err instanceof Error) {
-        setError(err.message)
+        if (err.message.includes('Network Error')) {
+          setError('Erro de conexão. Verifique se o servidor está rodando.');
+        } else {
+          setError(err.message);
+        }
       } else {
         setError('Erro ao fazer login. Verifique suas credenciais.')
       }

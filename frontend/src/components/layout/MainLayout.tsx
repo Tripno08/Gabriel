@@ -39,7 +39,7 @@ export default function MainLayout() {
           <div className="px-4 py-3">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-lg font-bold text-gray-900">Gabriel</h1>
+                <h1 className="text-lg font-bold text-gray-900">Wyn</h1>
                 <p className="text-sm text-gray-500">
                   Olá, {user?.name?.split(' ')[0] || 'Usuário'}!
                 </p>

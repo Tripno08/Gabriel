@@ -1,0 +1,11 @@
+{
+	"appId": "io.github.gabriel",
+	"appName": "Wyn",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "http",
+		"cleartext": true,
+		"allowNavigation": ["http://10.0.2.2:3000"]
+	},
+	"android": {}
+} 
