@@ -1,8 +1,6 @@
 import type { ReactNode } from 'react'
 import BottomNavigation from './BottomNavigation'
 import { useAuth } from '../../context/auth/AuthContext'
-import { LogOut } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 
 interface MobileLayoutProps {
   children: ReactNode
@@ -17,15 +15,7 @@ export default function MobileLayout({
   title,
   showHeader = true 
 }: MobileLayoutProps) {
-  const { user, logout } = useAuth()
-  const navigate = useNavigate()
-
-  const handleLogout = (e?: any) => {
-    e?.preventDefault()
-    e?.stopPropagation()
-    logout()
-    navigate('/login')
-  }
+  const { user } = useAuth()
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -46,23 +36,6 @@ export default function MobileLayout({
                   </div>
                 )}
               </div>
-              
-              {/* Logout button with touch support */}
-              <button
-                onClick={handleLogout}
-                onTouchEnd={handleLogout}
-                className="relative z-50 p-3 -m-1 text-gray-600 active:text-red-600 active:bg-red-50 rounded-lg transition-colors duration-200 touch-manipulation"
-                style={{ 
-                  minWidth: '44px', 
-                  minHeight: '44px',
-                  WebkitTapHighlightColor: 'transparent',
-                  userSelect: 'none'
-                }}
-                type="button"
-                aria-label="Sair da conta"
-              >
-                <LogOut className="w-5 h-5 pointer-events-none" />
-              </button>
             </div>
           </div>
         </header>

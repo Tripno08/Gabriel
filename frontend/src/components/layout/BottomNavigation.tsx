@@ -8,15 +8,21 @@ import {
   User,
   Briefcase,
   Settings,
-  Star
+  Star,
+  LogOut
 } from 'lucide-react'
 
 export default function BottomNavigation() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
 
   const isActive = (path: string) => location.pathname === path
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   const clientTabs = [
     {
@@ -48,6 +54,13 @@ export default function BottomNavigation() {
       label: 'Perfil',
       icon: User,
       path: '/client/profile/edit'
+    },
+    {
+      id: 'logout',
+      label: 'Sair',
+      icon: LogOut,
+      action: handleLogout,
+      isLogout: true
     }
   ]
 
@@ -81,6 +94,13 @@ export default function BottomNavigation() {
       label: 'Perfil',
       icon: Settings,
       path: '/provider/profile/edit'
+    },
+    {
+      id: 'logout',
+      label: 'Sair',
+      icon: LogOut,
+      action: handleLogout,
+      isLogout: true
     }
   ]
 
@@ -91,16 +111,24 @@ export default function BottomNavigation() {
       <div className="flex items-center justify-around py-2">
         {tabs.map((tab) => {
           const Icon = tab.icon
-          const active = isActive(tab.path)
+          const active = tab.path ? isActive(tab.path) : false
           
           return (
             <button
               key={tab.id}
-              onClick={() => navigate(tab.path)}
+              onClick={() => {
+                if (tab.action) {
+                  tab.action()
+                } else if (tab.path) {
+                  navigate(tab.path)
+                }
+              }}
               className={`flex flex-col items-center justify-center p-2 min-w-0 flex-1 ${
-                active 
-                  ? 'text-primary-600' 
-                  : 'text-secondary-400 hover:text-secondary-600'
+                tab.isLogout 
+                  ? 'text-red-500 hover:text-red-600' 
+                  : active 
+                    ? 'text-primary-600' 
+                    : 'text-secondary-400 hover:text-secondary-600'
               } transition-colors duration-200`}
             >
               <div className={`relative ${tab.id === 'add' ? 'p-2 rounded-full' : ''} ${
@@ -116,7 +144,11 @@ export default function BottomNavigation() {
                 )}
               </div>
               <span className={`text-xs mt-1 font-medium truncate ${
-                active ? 'text-primary-600' : 'text-secondary-400'
+                tab.isLogout 
+                  ? 'text-red-500' 
+                  : active 
+                    ? 'text-primary-600' 
+                    : 'text-secondary-400'
               } ${tab.id === 'add' ? 'text-secondary-600' : ''}`}>
                 {tab.label}
               </span>
