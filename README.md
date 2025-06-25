@@ -88,6 +88,22 @@ Para mais detalhes:
 - Android Studio + SDK (para desenvolvimento mobile)
 - Docker e Docker Compose (opcional)
 
+### Configuração de Variáveis de Ambiente
+
+Este projeto inclui arquivos `.env.example` para facilitar a configuração:
+
+```bash
+# Backend - copie e ajuste conforme necessário
+cp .env.example .env
+
+# Frontend - copie e ajuste conforme necessário
+cd frontend
+cp .env.example .env
+```
+
+Os arquivos `.env.example` contêm todas as variáveis necessárias com valores padrão.
+Para mais detalhes sobre cada variável, consulte [docs/ENV_TEMPLATE.md](docs/ENV_TEMPLATE.md).
+
 ### Desenvolvimento Mobile (Recomendado)
 
 ```bash
